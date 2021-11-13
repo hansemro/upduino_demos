@@ -2,7 +2,7 @@
 
 `blinky` cycles through 8 color states at roughly 1.5 Hz.
 
-This desgin was tested with Upduino v3.
+This design was tested with Upduino v3.
 
 # Setup
 
