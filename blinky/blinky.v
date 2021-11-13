@@ -1,3 +1,7 @@
+/*
+ * blinky.v : Blinky demo for upduino
+ */
+
 module blinky (
             input wire clk,
             input wire reset,
@@ -5,7 +9,7 @@ module blinky (
             output wire led_green,
             output wire led_red);
 
-    localparam N = 27;
+    parameter N = 27;
     reg [N:0] counter;
 
     // combinational logic
