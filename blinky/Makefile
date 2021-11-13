@@ -30,7 +30,7 @@ build_top.bin: blinky_top.$(PNR_METHOD).bin
 .PHONY: build build_arachne-pnr build_nextpnr
 build: build_top.bin
 
-.PHONY: sim wave
+.PHONY: sim wave time
 sim: blinky.v blinky_tb.v
 	iverilog -o blinky_tb.out -D VCD_OUTPUT=blinky_tb $^
 	vvp blinky_tb.out
@@ -40,6 +40,8 @@ wave: sim
 	else \
 		gtkwave blinky_tb.vcd & \
 	fi
+time: blinky_top.$(PNR_METHOD).asc
+	icetime -p $(PCF_FILE) -d up5k -t -o blinky.timing.rpt $<
 
 .PHONY: upload
 upload: blinky_top.bin
@@ -56,6 +58,7 @@ clean:
 	-rm -f blinky_top*.bin
 	-rm -f blinky_tb.out
 	-rm -f blinky_tb.gtkw
+	-rm -f blinky.timing.rpt
 
 .PHONY: help
 help:
