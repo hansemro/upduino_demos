@@ -35,7 +35,11 @@ sim: blinky.v blinky_tb.v
 	iverilog -o blinky_tb.out -D VCD_OUTPUT=blinky_tb $^
 	vvp blinky_tb.out
 wave: sim
-	gtkwave blinky_tb.vcd
+	@if [ -f blinky_tb.gtkw ]; then \
+		gtkwave blinky_tb.vcd blinky_tb.gtkw & \
+	else \
+		gtkwave blinky_tb.vcd & \
+	fi
 
 .PHONY: upload
 upload: blinky_top.bin
